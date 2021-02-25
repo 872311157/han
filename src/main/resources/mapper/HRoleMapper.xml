@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.han.system.mapper.HRoleMapper">
+    <resultMap id="HRole" type="com.example.han.system.entity.HRole">
+        <id column="id" property="id"/>
+        <result column="createtime" jdbcType="DATE" property="createTime"/>
+        <result column="isdel" jdbcType="INTEGER" property="isDel"/>
+        <result column="rolename" jdbcType="VARCHAR" property="roleName"/>
+        <result column="rolenamezh" jdbcType="VARCHAR" property="roleNameZh"/>
+    </resultMap>
+
+    <select id="getRolesByUid" resultMap="HRole" parameterType="java.lang.Integer">
+        select * from hrole where id in (select id from hrole_huser where uid= #{id})
+    </select>
+<!--    <select id="" resultType=""></select>-->
+<!--    <insert id="" parameterType=""></insert>-->
+</mapper>

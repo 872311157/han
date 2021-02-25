@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        function getUserDetails1(){
+            $.ajax({
+                type: "get",
+                async: false,//同步，异步
+                url: "/me", //请求的服务端地址
+                dataType: "json",
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(i, s, e){
+                debugger
+                    flag = false;
+                    alert(JSON.stringify(i)); //错误的处理
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <button id="btn1" onclick="getUserDetails1();">获取用户信息</button>
+    <h1>Admin</h1>
+</body>
+</html>

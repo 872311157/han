@@ -1,0 +1,28 @@
+CREATE TABLE huser(
+	id serial PRIMARY KEY not null,
+	createtime DATE,
+	username VARCHAR(64),
+	password VARCHAR(128)
+);
+--drop table huser
+
+select * from huser
+insert into huser(username, password, createtime) values('han', '$2a$10$i88Fw2yuJxmcdtyvhN84W.x.ohitBTMNu3TOyq8ia3poShw9vR0A2', '2021-02-25 10:00:00');
+
+
+
+CREATE TABLE hrole(
+	id serial PRIMARY KEY not null,
+	createtime DATE,
+	isDel INT,
+	roleName VARCHAR(64),
+	roleNameZh VARCHAR(128)
+);
+select * from hrole
+insert into hrole(createtime, isDel, roleName, roleNameZh) values('2021-02-25 10:00:00', 0, 'ROLE_ADMIN', '管理员')
+
+
+
+
+
+
