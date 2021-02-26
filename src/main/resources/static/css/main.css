@@ -1,0 +1,101 @@
+body, html{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+.main_body{
+	width: 100%;
+	height: 890px;
+    overflow: hidden;
+}
+/*.main_body .main_top{
+    width:100%;
+    height:10%;
+    background-color: #393939;
+}*/
+
+/* 主页 start*/
+.main_top{
+    position:relative;
+    top: 0;
+    left: 0;
+    /*background: #393939;*/
+    background-image: url("../images/bg-top.png");
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #afaaaa;
+    /*height: 10%;*/
+}
+.main_logo{
+    /*background: #393939;*/
+    height: 45px;
+    text-align: center;
+    padding-top: 20px;
+    float: left;
+    margin-left: 20px;
+ }
+.main_green{
+    /*background: #393939;*/
+    color: #aeb2b7;
+    font-size: 14px;
+    float: right;
+}
+.main_exit{
+    text-align: right;
+    height: 54px;
+    line-height: 60px;
+}
+.main_exit a{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-indent: -9999px;
+    vertical-align: middle;
+    overflow: hidden;
+    background: url("../images/icon.png") no-repeat;
+    margin: 0 10px 0 0;
+}
+.main_exit a.help{
+    background-position: -114px 0;
+}
+.main_exit a.exit{
+    background-position: -85px 0;
+}
+.main_exit a:hover.help{
+    background-position: -114px -20px;
+}
+.main_exit a:hover.exit{
+    background-position: -85px -20px;
+}
+.main_exit main_span{
+    padding-right: 20px;
+}
+
+.main_left{
+    width:12%;
+    height:825px;
+    float: left;
+    background-color: #57828D;
+}
+.main_right{
+    width:88%;
+    height:820px;
+    float: right;
+}
+.right_head{
+    height: 19px;
+    background: #fff;
+    border-bottom: 1px solid #dcdcdc;
+    box-shadow: 0 1px 2px #f8f8f8;
+    padding: 15px 10px;
+}
+
+/* right */
+/*.main_bt{
+    background: #fff;
+    border-bottom: 1px solid #dcdcdc;
+    box-shadow: 0 1px 2px #f8f8f8;
+    padding: 15px 10px;
+}*/
+/* 主页 end*/
+

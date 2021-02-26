@@ -25,6 +25,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         //获取请求的url
         String requestUrl = ((FilterInvocation) object).getRequestUrl();
+        //这些url不需要角色即可访问
         if(antPathMatcher.match("/login.html",requestUrl) || antPathMatcher.match("/toLogin", requestUrl) || antPathMatcher.match("/toRegister", requestUrl)){
             return null;
         }

@@ -1,4 +1,73 @@
 /*菜单*/
+Vue.component('vue-tree', {
+    props: ['bean'],
+    template: '<div class="left-side-menu" ><div class="lsm-expand-btn"><div class="lsm-mini-btn"><label><input type="checkbox" checked="checked"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="25" /><path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" /><path class="line--2" d="M0 50h80" /><path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" /></svg></label></div></div>'
+                +'<div class="lsm-container"><div class="lsm-scroll" ><div class="lsm-sidebar">'
+                    +'<ul><li class="lsm-sidebar-item" v-for="module in modules"><a href="javascript:;"><i class="my-icon lsm-sidebar-icon" v-bind:class="module.icon"></i><span>{{module.mName}}</span><i class="my-icon lsm-sidebar-more"></i></a>'
+                        +'<ul><li v-for="child in module.childMs"><a href="javascript:;" v-on:click="open_page"><span>{{child.mName}}</span></a></li></ul>'
+                    +'</li></ul>'
+                +'</div></div></div>'
+             +'</div>',
+    data: function () {
+        this.checkedNid = '';
+        this.modules = this.init_modules();
+        return {modules: this.modules,box: false}
+    },
+    methods: {
+        init_modules: function(){
+            var modules;
+            modules = [{'id':1,'mName':'系统管理','icon':'icon_1','childMs':[{'mName':'地爆天星'},{'mName':'地爆天星'},{'mName':'地爆天星'}]},{'id':2,'mName':'角色管理','icon':'icon_2'},{'id':3,'mName':'模块管理','icon':'icon_3'},{'id':4,'mName':'用户管理','icon':'icon_4'}]
+            var userid = this.bean.userid;
+            var url = this.bean.dataUrl;
+//            $.ajax({
+//                type: "post",
+//                async: false,//同步，异步
+//                url: url, //请求的服务端地址
+//                data: {userid: this.bean.userid},
+//                dataType: "json",
+//                success:function(data){
+//                    modules = data;
+//                    console.log(data);
+//                },
+//                error:function(i, s, e){
+//                    flag = false;
+//                    alert('error'); //错误的处理
+//                }
+//            });
+            return modules;
+        },
+        open_page: function(arg){
+            debugger
+            alert(arg);
+//            var target = arg.target;
+//            var firstNode = $(target).parents(".folderOne");
+//            if(firstNode){
+//                var firstName = firstNode.children("label:first").text();
+//                this.$parent.bean.firstName = firstName;
+//            }
+//            var secondNode = $(target).parents(".folderTwo");
+//            if(secondNode){
+//                var secondName = secondNode.children("label:first").text();
+//                this.$parent.bean.secondName = secondName;
+//            }
+//            if(!this.checkedMs){
+//                this.checkedNid = target.getAttribute("nid");
+//            }
+//            $(".active").each(function(i, item){
+//                item.className = "";
+//            })
+//
+//            var ol = target.parentElement.parentElement;
+//            ol.className = "active";
+//            var src = target.getAttribute("psrc");
+//            var server = this.$parent.bean.config.server;
+//            this.$parent.bean.pageUrl = server + src;
+        }
+    }
+})
+
+
+
 Vue.component('vue-tree2', {
     props: ['bean'],
     template: '<ol class="tree">'+
@@ -16,32 +85,25 @@ Vue.component('vue-tree2', {
         init_modules: function(){
             debugger
             var modules;
+            modules = [{'id':1,'mName':'系统管理','imgUrl':''},{'id':2,'mName':'角色管理','imgUrl':''},{'id':3,'mName':'模块管理','imgUrl':''},{'id':4,'mName':'用户管理','imgUrl':''}]
             var userid = this.bean.userid;
             var url = this.bean.dataUrl;
-            $.ajax({
-                type: "post",
-                async: false,//同步，异步
-                url: url, //请求的服务端地址
-                data: {userid: this.bean.userid},
-                dataType: "json",
-                success:function(data){
-//                    $(data).each(function(i, item){
-//                        var childs = item.childs;
-//                        $(childs).each(function(j, child){
-//                            var mtype = child.mtype;
-//                            if("1" == mtype){
-//                                child.maddress = pageurl + child.maddress;
-//                            }
-//                        })
-//                    })
-                    modules = data;
-                    console.log(data);
-                },
-                error:function(i, s, e){
-                    flag = false;
-                    alert('error'); //错误的处理
-                }
-            });
+//            $.ajax({
+//                type: "post",
+//                async: false,//同步，异步
+//                url: url, //请求的服务端地址
+//                data: {userid: this.bean.userid},
+//                dataType: "json",
+//                success:function(data){
+//                    modules = data;
+//                    console.log(data);
+//                },
+//                error:function(i, s, e){
+//                    flag = false;
+//                    alert('error'); //错误的处理
+//                }
+//            });
+
             return modules;
         },
         extend_nodes: function(arg){

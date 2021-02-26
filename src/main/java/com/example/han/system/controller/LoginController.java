@@ -38,7 +38,7 @@ public class LoginController {
     @RequestMapping("/main")
     public String login(){
         log.info("登录成功!");
-        return "main";
+        return "main1";
     }
 
     /**

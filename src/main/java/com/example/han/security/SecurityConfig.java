@@ -123,5 +123,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // BCryptPasswordEncoder：Spring Security 提供的加密工具，可快速实现加密加盐
         return new BCryptPasswordEncoder();
     }
-
 }
