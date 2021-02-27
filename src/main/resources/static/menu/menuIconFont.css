@@ -15,8 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-touxiang:before { content: "\e62c"; }
-
+/*头像*/
+.icon-face:before { content: "\e62c"; }
+/**/
 .icon-crmtubiaohuaban35fuben3773:before { content: "\e85f"; }
 
 .icon-shengyuliuliang:before { content: "\e650"; }
@@ -27,6 +28,7 @@
 
 .icon-tuichu:before { content: "\e60b"; }
 
+/*关机*/
 .icon-iconset0253:before { content: "\e698"; }
 
 .icon-iconset0308:before { content: "\e6cf"; }
@@ -41,6 +43,7 @@
 
 .icon-chongzhi4:before { content: "\e6b4"; }
 
+/*齿轮*/
 .icon-shezhichilun:before { content: "\e62b"; }
 
 .icon-chongzhi2:before { content: "\e6c7"; }
@@ -57,6 +60,7 @@
 
 .icon-worldwide:before { content: "\e690"; }
 
+/*网络*/
 .icon-5daqu:before { content: "\e669"; }
 
 .icon-touxiang1:before { content: "\e60e"; }

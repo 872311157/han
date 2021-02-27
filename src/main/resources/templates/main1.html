@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>XXX系统管理中心</title>
     <link rel="stylesheet" href="css/main.css" media="all">
-    <link rel="stylesheet" href="menu/left-side-menu.css" media="all">
-    <link rel="stylesheet" href="menu/font/iconfont.css" media="all">
+    <link rel="stylesheet" href="menu/menu.css" media="all">
+    <link rel="stylesheet" href="menu/menuIconFont.css" media="all">
     <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="menu/jquery.slimscroll.min.js"></script>
     <script src="js/vue.min.js"></script>
     <script src="js/vue-utils.js"></script>
-    <script src="menu/jquery.slimscroll.min.js"></script>
-    <script src="menu/left-side-menu.js"></script>
     <script>
         var configMap;
         window.onload = function(){
@@ -18,22 +17,34 @@
             var userid = $("#userid").val();
 <!--            configMap = this.getDefaultValue();-->
             configMap = {};
-            new Vue({
+            var menuVue = new Vue({
                 el: '#main',
                 data: {
                     server: configMap.server,
+                    iframeUrl: '',
+                    firstName: '',
+                    secondName: '',
+                    thirdName:'',
                     bean:{
-                        firstName: '',
-                        secondName: '',
-                        thirdName:'',
                         config: configMap,
                         userid: userid,
                         pageUrl: '',
                         dataUrl: '/hy/hyModule/queryModules'
                     }
+                },
+                methods: {
+                    open_iframe: function(arg){
+                        debugger
+                        this.firstName = arg.firstName;
+                        this.secondName = arg.secondName;
+                        this.thirdName = arg.thirdName;
+                        this.iframeUrl = arg.url;
+                    }
                 }
             })
+
         }
+
         var getDefaultValue = function(){
             var defaultData = null;
             $.ajax({
@@ -75,11 +86,11 @@
     </div>
     <div class="main_right">
         <div class="right_head">
-            <span v-if="bean.firstName !== ''">{{bean.firstName}}</span>
-            <span v-if="bean.secondName !== ''"> > {{bean.secondName}}</span>
-            <span v-if="bean.thirdName !== ''"> > {{bean.thirdName}}</span>
+            <span v-if="firstName !== ''">{{firstName}}</span>
+            <span v-if="secondName !== ''"> > {{secondName}}</span>
+            <span v-if="thirdName !== ''"> > {{thirdName}}</span>
         </div>
-<!--        <iframe style="width: 100%; height: 800px;border-style: hidden;" v-bind:src="bean.pageUrl"></iframe>-->
+        <iframe style="width: 100%; height: 800px;border-style: hidden;" v-bind:src="iframeUrl"></iframe>
     </div>
 </div>
 </body>
