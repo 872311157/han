@@ -4,6 +4,7 @@
     <resultMap id="HModule" type="com.example.han.system.entity.HModule">
         <id column="id" property="id"/>
         <result column="createtime" jdbcType="DATE" property="createTime"/>
+        <result column="iconfont" jdbcType="VARCHAR" property="iconFont"/>
         <result column="modulename" jdbcType="VARCHAR" property="moduleName"/>
         <result column="moduleurl" jdbcType="VARCHAR" property="moduleUrl"/>
         <result column="moduletype" jdbcType="INTEGER" property="moduleType"/>
@@ -12,7 +13,33 @@
     </resultMap>
 
     <select id="getModulesByUid" resultMap="HModule" parameterType="java.lang.Integer">
-        select mid id, modulename, moduleurl, moduletype, orderno from view_usermodules where uid = #{id})
+        select mid id, iconfont, modulename, moduleurl, moduletype, parentid, orderno from view_usermodules where uid = #{id}
+    </select>
+
+    <select id="queryPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from hmodule
+        <where>
+            <if test="moduleName!=null">
+                and modulename like concat('%',#{moduleName},'%')
+            </if>
+            <if test="moduleType!=null">
+                and moduletype = #{moduleType}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPageList" resultType="com.example.han.system.entity.HModule" parameterType="java.util.Map">
+        select * from hmodule
+        <where>
+            <if test="moduleName!=null">
+                and modulename like concat('%',#{moduleName},'%')
+            </if>
+            <if test="moduleType!=null">
+                and moduletype = #{moduleType}
+            </if>
+        </where>
+        order by createtime desc LIMIT #{pageSize} OFFSET #{startIndex}
+        <!--mysql limit #{startIndex},#{pageSize}-->
     </select>
 <!--    <select id="" resultType=""></select>-->
 <!--    <insert id="" parameterType=""></insert>-->

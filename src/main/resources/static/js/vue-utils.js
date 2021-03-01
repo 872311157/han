@@ -3,8 +3,8 @@ Vue.component('vue-tree', {
     props: ['bean'],
     template: '<div class="left-side-menu" ><div class="lsm-expand-btn"><div class="lsm-mini-btn"><label><input type="checkbox" checked="checked"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="25" /><path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" /><path class="line--2" d="M0 50h80" /><path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" /></svg></label></div></div>'
                 +'<div class="lsm-container"><div class="lsm-scroll" ><div class="lsm-sidebar">'
-                    +'<ul><li class="lsm-sidebar-item" v-for="module in modules"><a href="javascript:;"><i class="my-icon lsm-sidebar-icon" v-bind:class="module.icon"></i><span level="1">{{module.mName}}</span><i class="my-icon lsm-sidebar-more"></i></a>'
-                        +'<ul style="display: none;"><li v-for="child in module.childMs"><a href="javascript:;" v-bind:mid="child.id" v-on:click="open_page"><span level="2">{{child.mName}}</span></a></li></ul>'
+                    +'<ul><li class="lsm-sidebar-item" v-for="module in modules"><a href="javascript:;"><i class="my-icon lsm-sidebar-icon" v-bind:class="module.iconFont"></i><span level="1">{{module.moduleName}}</span><i class="my-icon lsm-sidebar-more"></i></a>'
+                        +'<ul style="display: none;"><li v-for="child in module.childList"><a href="javascript:;" v-bind:mid="child.id" v-on:click="open_page"><span level="2">{{child.moduleName}}</span></a></li></ul>'
                     +'</li></ul>'
                 +'</div></div></div>'
              +'</div>',
@@ -12,8 +12,7 @@ Vue.component('vue-tree', {
         this.firstName = '';
         this.secondName = '';
         this.thirdName = '';
-
-        this.mMap = {'1':{'firstName':'','secondName':'','thirdName':'','url':'/han/module'}, '2':{'url':'/han/user'}};
+        this.mMap = {};
         this.checkedNid = '';
         this.modules = this.init_modules();
         return {modules: this.modules,box: false}
@@ -118,29 +117,41 @@ Vue.component('vue-tree', {
     },
     methods: {
         init_modules: function(){
+            var _that = this;
             var modules;
-            modules = [{'id':1,'mName':'系统管理','icon':'icon_1','childMs':[{'id':1, 'mName':'地爆天星'},{'mName':'地爆天星'},{'mName':'地爆天星'}]},{'id':2,'mName':'角色管理','icon':'icon_2'},{'id':3,'mName':'模块管理','icon':'icon_3'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':5,'mName':'用户管理','icon':'icon_5'},{'id':4,'mName':'用户管理','icon':'icon-touxiang'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'最后一个','icon':'icon_4'}]
+//            modules = [{'id':1,'mName':'系统管理','icon':'icon_1','childMs':[{'id':1, 'mName':'地爆天星'},{'mName':'地爆天星'},{'mName':'地爆天星'}]},{'id':2,'mName':'角色管理','icon':'icon_2'},{'id':3,'mName':'模块管理','icon':'icon_3'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':5,'mName':'用户管理','icon':'icon_5'},{'id':4,'mName':'用户管理','icon':'icon-touxiang'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'用户管理','icon':'icon_4'},{'id':4,'mName':'最后一个','icon':'icon_4'}]
             var userid = this.bean.userid;
             var url = this.bean.dataUrl;
-//            $.ajax({
-//                type: "post",
-//                async: false,//同步，异步
-//                url: url, //请求的服务端地址
-//                data: {userid: this.bean.userid},
-//                dataType: "json",
-//                success:function(data){
-//                    modules = data;
-//                    console.log(data);
-//                },
-//                error:function(i, s, e){
-//                    flag = false;
-//                    alert('error'); //错误的处理
-//                }
-//            });
+            $.ajax({
+                type: "post",
+                async: false,//同步，异步
+                url: url, //请求的服务端地址
+                data: {userid: userid},
+                dataType: "json",
+                success:function(data){
+                debugger
+                    _that.initPageSrc(data);
+                    modules = data;
+                    console.log(data);
+                },
+                error:function(i, s, e){
+                    flag = false;
+                    alert('error'); //错误的处理
+                }
+            });
             return modules;
         },
+        initPageSrc: function(data){
+            var _that = this;
+            data.forEach(function(item){
+                var childList = item.childList;
+                _that.mMap[item.id] = {'url':item.moduleUrl};
+                if(childList){
+                    _that.initPageSrc(childList);
+                }
+            })
+        },
         open_page: function(arg){
-            debugger
             var target = arg.currentTarget;
             this.fullMenuName(target);
             var mid = target.getAttribute('mid');
@@ -279,13 +290,15 @@ Vue.component('vue-table', {
         init_table: function(){
             debugger
             var sites;
-            var moduleName = this.config.moduleName;
-            var search_service = this.config.configMap.server;
-            if(this.config.searchName){
-                search_service += moduleName + "/" + this.config.searchName;
-            }else{
-                search_service += moduleName + "/queryPageList";
-            }
+//            var moduleName = this.config.moduleName;
+            var searchName = this.config.searchName;
+            var search_server = this.config.search_server;
+            var search_service = search_server + "/" + searchName;
+//            if(this.config.searchName){
+//                search_service += moduleName + "/" + this.config.searchName;
+//            }else{
+//                search_service += moduleName + "/queryPageList";
+//            }
             if(this.pageNum){
                 this.params.pageNum = this.pageNum;
             }
@@ -332,7 +345,8 @@ Vue.component('vue-table', {
             debugger
             var _this = this;
             var id = arg.target.getAttribute("ids");
-            var del_service = this.parentPageInfo.configMap.server + this.parentPageInfo.moduleName + "/delete";
+//            var del_service = this.parentPageInfo.configMap.server + this.parentPageInfo.moduleName + "/delete";
+            var del_service = this.del_service;
             var bean = {id: id};
             $.ajax({
                 type: "post",

@@ -115,7 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/login.html") // session 过期退出时调用
                 .maximumSessions(1) //指定最大登录数
                 .maxSessionsPreventsLogin(false); //是否保留已经登录的用户；为true，新用户无法登录；为 false，旧用户被踢出
-//      http.headers().frameOptions().disable(); //解决不允许显示在iframe的问题
+      http.headers().frameOptions().disable(); //解决不允许显示在iframe的问题
     }
 
     @Bean

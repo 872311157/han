@@ -1,5 +1,6 @@
 package com.example.han.system.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class HModule {
     private Integer id;
     private Date createtime;
+    private String iconFont;//图标
     private String moduleName;//模型名称
     private String moduleUrl;//模型url地址
     private Integer moduleType;// 模型类别0-分类，1引用
@@ -22,6 +24,14 @@ public class HModule {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getIconFont() {
+        return iconFont;
+    }
+
+    public void setIconFont(String iconFont) {
+        this.iconFont = iconFont;
     }
 
     public Date getCreatetime() {
@@ -78,5 +88,10 @@ public class HModule {
 
     public void setChildList(List<HModule> childList) {
         this.childList = childList;
+    }
+
+    public void addChild(HModule child){
+        this.childList = (null == this.childList) ? new ArrayList<HModule>() : this.childList;
+        this.childList.add(child);
     }
 }

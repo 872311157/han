@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/hy/css/vue-utils.css" rel="stylesheet" type="text/css" />
+    <script src="/hy/js/jquery-3.5.1.js"></script>
+    <script src="/hy/js/vue.js"></script>
+    <script src="/hy/js/vue-utils.js"></script>
+    <script src="/hy/js/hyPageBase.js"></script>
+    <script src="/hy/system/hyModule/hyModule_add.js"></script>
+</head>
+<body>
+    <div id="hyModule_modify" class="infoPage">
+        <div class="infoMain" v-bind:style="{'height':main_height}">
+            <div class="spanOne">
+                <span>模块名称:</span>
+                <span>
+                    <input hidden="hidden" type="text" v-model="saveBean.id"/>
+                    <input type="text" v-model="saveBean.mName"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>地址:</span>
+                <span>
+                    <input type="text" v-model="saveBean.mAddress"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>类别:</span>
+                <span>
+                    <select v-model="saveBean.mType">
+                        <option value="0">分类</option>
+                        <option value="1">引用</option>
+                    </select>
+                </span>
+            </div>
+
+            <div class="spanOne">
+                <span>父模块:</span>
+                <span>
+                    <input type="text" v-model="saveBean.parentId"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>图标地址:</span>
+                <span>
+                    <input type="text" v-model="saveBean.imgUrl"/>
+                </span>
+            </div>
+        </div>
+        <div class="infoBottom">
+<!--            <input class="none-int" type="button" v-on:click="closePage" value="取消"/>-->
+            <input class="blue-int" v-bind:style="{'margin-left':b_left}" type="button" v-on:click="innerInfoSubmit" value="确定"/>
+        </div>
+    </div>
+</body>
+</html>

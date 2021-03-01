@@ -4,8 +4,9 @@
 var HySearchPage = function(){
     this.vue;
     this.vueId;
-    this.configMap;
-    this.moduleName;
+    this.search_server;
+//    this.configMap;
+//    this.moduleName;
     this.insertPage;
     this.modifyPage;
     this.detailPage;
@@ -32,7 +33,7 @@ var HySearchPage = function(){
 
     this.createVue = function(){
         debugger
-        if(this.vueId || this.moduleName || this.configMap.server){
+        if(this.vueId){
             this.vue = new Vue({
                 el: "#" + this.vueId,
                 data: {
@@ -40,13 +41,14 @@ var HySearchPage = function(){
                     modelInfo: this.modelInfo,
                     params: this.params,
                     config: {
-                        moduleName: this.moduleName,
-                        configMap: this.configMap,
-                        searchName: this.searchName
+                        searchName: this.searchName,
+//                        configMap: this.configMap,
+                        search_server: this.search_server
                     }
                 },
                 methods: {
                     innerSearch: function(){
+                        debugger
                         var vueTable = this.$refs.VueTable;
                         if(vueTable){
                             vueTable.pageNum = 1;
@@ -124,7 +126,7 @@ var HyInfoPage = function(){
         this.parentPageInfo = window.parent.pageInfo;
         this.modelInfo = this.parentPageInfo.modelInfo;
         this.configMap = this.parentPageInfo.configMap;
-        this.moduleName = this.parentPageInfo.moduleName;
+//        this.moduleName = this.parentPageInfo.moduleName;
         if(this.setDefaultData2){
             this.setDefaultData2(this);
         }
@@ -137,7 +139,7 @@ var HyInfoPage = function(){
             this.afterSetPageData(this.modelInfo.id);
         }
 
-        if(this.vueId || this.moduleName || this.configMap.server){
+        if(this.vueId || this.configMap.server){
             var winWidth = window.innerWidth;
             var winHeight = window.innerHeight;
             var main_height = (winHeight - 57)*100/winHeight + "%";

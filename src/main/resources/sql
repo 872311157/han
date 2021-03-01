@@ -28,17 +28,18 @@ insert into hrole(createtime, isDel, roleName, roleNameZh) values('2021-02-25 10
 CREATE TABLE hmodule(
 	id serial PRIMARY KEY not null,
 	createtime DATE,
+	iconfont VARCHAR(64),
 	modulename VARCHAR(64),
 	moduleurl VARCHAR(64),
 	parentid INTEGER,
 	moduletype INTEGER
 );
 --alter table hmodule add orderno INTEGER; --序号
-insert into hmodule(modulename, moduletype, orderno) values('系统管理', 0, 0);
-insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('系统配置', '/han/system', 0, 0, 1);
-insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('角色配置', '/han/role', 1, 1, 1);
-insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('用户配置', '/han/user', 1, 2, 1);
-insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('模型配置', '/han/module', 1, 3, 1);
+insert into hmodule(iconfont, modulename, moduletype, orderno) values('系统管理', 0, 0);
+insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('系统配置', '/han/system', 0, 0, 1);
+insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('角色配置', '/han/role', 1, 1, 1);
+insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('用户配置', '/han/user', 1, 2, 1);
+insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('模型配置', '/han/module', 1, 3, 1);
 
 CREATE TABLE hrole_hmodule(
 	id serial PRIMARY KEY not null,
@@ -57,7 +58,7 @@ insert into hrole_hmodule(rid, mid) values(1, 5);
 --drop view view_usermodules;
 
 create or replace VIEW view_usermodules AS
-select hru.uid, hu.username, hru.rid, hr.rolename, hr.rolenamezh, hr.isdel, hrm.mid, hm.modulename, hm.moduleurl, hm.moduletype, hm.orderno from huser hu
+select hru.uid, hu.username, hru.rid, hr.rolename, hr.rolenamezh, hr.isdel, hrm.mid, hm.iconfont, hm.modulename, hm.moduleurl, hm.moduletype, hm.parentid, hm.orderno from huser hu
 left join hrole_huser hru on hu.id=hru.uid
 left join hrole hr on hru.rid = hr.id
 left join hrole_hmodule hrm on hr.id = hrm.rid
