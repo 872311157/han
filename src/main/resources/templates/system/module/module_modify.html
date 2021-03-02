@@ -3,49 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="/hy/css/vue-utils.css" rel="stylesheet" type="text/css" />
-    <script src="/hy/js/jquery-3.5.1.js"></script>
-    <script src="/hy/js/vue.js"></script>
-    <script src="/hy/js/vue-utils.js"></script>
-    <script src="/hy/js/hyPageBase.js"></script>
-    <script src="/hy/system/hyModule/hyModule_add.js"></script>
+    <link href="../../css/vue-utils.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="../../js/jquery-3.5.1.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/vue-utils.js"></script>
+    <script src="../../js/hyPageBase.js"></script>
+    <script src="./module_modify.js"></script>
 </head>
 <body>
-    <div id="hyModule_modify" class="infoPage">
+    <div id="module_modify" class="infoPage">
         <div class="infoMain" v-bind:style="{'height':main_height}">
             <div class="spanOne">
                 <span>模块名称:</span>
                 <span>
-                    <input hidden="hidden" type="text" v-model="saveBean.id"/>
-                    <input type="text" v-model="saveBean.mName"/>
+                    <input hidden="hidden" type="text" v-model="moduleBean.id"/>
+                    <input type="text" v-model="moduleBean.moduleName"/>
                 </span>
             </div>
             <div class="spanOne">
-                <span>地址:</span>
+                <span>访问路径:</span>
                 <span>
-                    <input type="text" v-model="saveBean.mAddress"/>
+                    <input type="text" v-model="moduleBean.moduleUrl"/>
                 </span>
             </div>
             <div class="spanOne">
                 <span>类别:</span>
                 <span>
-                    <select v-model="saveBean.mType">
+                    <select v-model="moduleBean.moduleType">
                         <option value="0">分类</option>
                         <option value="1">引用</option>
                     </select>
                 </span>
             </div>
-
             <div class="spanOne">
                 <span>父模块:</span>
                 <span>
-                    <input type="text" v-model="saveBean.parentId"/>
+                    <input type="text" v-model="moduleBean.parentId"/>
                 </span>
             </div>
             <div class="spanOne">
-                <span>图标地址:</span>
+                <span>图标:</span>
                 <span>
-                    <input type="text" v-model="saveBean.imgUrl"/>
+                    <input type="text" v-model="moduleBean.iconFont"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>序号:</span>
+                <span>
+                    <input type="text" v-model="moduleBean.orderNo"/>
                 </span>
             </div>
         </div>

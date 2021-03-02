@@ -1,5 +1,6 @@
 package com.example.han.system.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -11,6 +12,9 @@ public class HRole {
     private Integer isDel;//是否有效0-有效，1-无效
     private String roleName;//角色名称
     private String roleNameZh;//角色中文名称
+
+    private String createTimeStr;//
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Integer getId() {
         return id;
@@ -50,5 +54,13 @@ public class HRole {
 
     public void setRoleNameZh(String roleNameZh) {
         this.roleNameZh = roleNameZh;
+    }
+
+    public String getCreateTimeStr() {
+        return this.sdf.format(this.createTime);
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
     }
 }

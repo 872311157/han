@@ -12,9 +12,47 @@
         <result column="orderno" jdbcType="INTEGER" property="orderNo"/>
     </resultMap>
 
-    <select id="getModulesByUid" resultMap="HModule" parameterType="java.lang.Integer">
-        select mid id, iconfont, modulename, moduleurl, moduletype, parentid, orderno from view_usermodules where uid = #{id}
+    <select id="query" resultType="com.example.han.system.entity.HModule" parameterType="java.util.Map">
+        select * from hmodule
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+        </where>
     </select>
+
+    <insert id="save" parameterType="com.example.han.system.entity.HModule">
+        insert into hModule(createTime, iconFont, moduleName, moduleUrl, moduleType, parentId, orderNo) values(#{createTime}, #{iconFont}, #{moduleName}, #{moduleUrl}, #{moduleType}, #{parentId}, #{orderNo})
+    </insert>
+
+    <update id="modify" parameterType="com.example.han.system.entity.HModule">
+        update hModule
+        <set>
+            <if test="moduleName != null">
+                moduleName = #{moduleName, jdbcType=VARCHAR},
+            </if>
+            <if test="moduleUrl != null">
+                moduleUrl = #{moduleUrl, jdbcType=VARCHAR},
+            </if>
+            <if test="parentId > -1">
+                parentId = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="moduleType != null">
+                moduleType = #{moduleType,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                orderNo = #{orderNo, jdbcType=INTEGER},
+            </if>
+            <!--            <if test="createTime != null">-->
+            <!--                createTime = #{createTime,jdbcType=TIMESTAMP},-->
+            <!--            </if>-->
+        </set>
+        where id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from hmodule where id = #{id}
+    </delete>
 
     <select id="queryPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from hmodule
@@ -40,6 +78,10 @@
         </where>
         order by createtime desc LIMIT #{pageSize} OFFSET #{startIndex}
         <!--mysql limit #{startIndex},#{pageSize}-->
+    </select>
+
+    <select id="getModulesByUid" resultMap="HModule" parameterType="java.lang.Integer">
+        select mid id, iconfont, modulename, moduleurl, moduletype, parentid, orderno from view_usermodules where uid = #{id}
     </select>
 <!--    <select id="" resultType=""></select>-->
 <!--    <insert id="" parameterType=""></insert>-->

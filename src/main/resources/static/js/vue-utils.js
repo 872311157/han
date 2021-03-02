@@ -260,8 +260,8 @@ Vue.component('vue-tree2', {
             var ol = target.parentElement.parentElement;
             ol.className = "active";
             var src = target.getAttribute("psrc");
-            var server = this.$parent.bean.config.server;
-            this.$parent.bean.pageUrl = server + src;
+//            var server = this.$parent.bean.config.server;
+            this.$parent.bean.pageUrl = src;
         }
     }
 })
@@ -292,8 +292,8 @@ Vue.component('vue-table', {
             var sites;
 //            var moduleName = this.config.moduleName;
             var searchName = this.config.searchName;
-            var search_server = this.config.search_server;
-            var search_service = search_server + "/" + searchName;
+            var module_server = this.config.module_server;
+            var search_service = module_server + "/" + searchName;
 //            if(this.config.searchName){
 //                search_service += moduleName + "/" + this.config.searchName;
 //            }else{
@@ -343,26 +343,29 @@ Vue.component('vue-table', {
         },
         innerDelete: function(arg){
             debugger
-            var _this = this;
-            var id = arg.target.getAttribute("ids");
-//            var del_service = this.parentPageInfo.configMap.server + this.parentPageInfo.moduleName + "/delete";
-            var del_service = this.del_service;
-            var bean = {id: id};
-            $.ajax({
-                type: "post",
-                async: false,//同步，异步
-                url: del_service, //请求的服务端地址
-                data: bean,
-                dataType: "json",
-                success:function(data){
-                    _this.$parent.closePage();
-                    _this.search();
-                },
-                error:function(i, s, e){
-                    alert('error'); //错误的处理
-                }
-            });
-
+            if(confirm("是否确认删除?")){
+                var _this = this;
+                var id = arg.target.getAttribute("ids");
+    //            var del_service = this.parentPageInfo.configMap.server + this.parentPageInfo.moduleName + "/delete";
+                var delName = this.config.delName;
+                var module_server = this.config.module_server;
+                var del_service = module_server + "/" + delName;;
+                var bean = {id: id};
+                $.ajax({
+                    type: "post",
+                    async: false,//同步，异步
+                    url: del_service, //请求的服务端地址
+                    data: bean,
+                    dataType: "json",
+                    success:function(data){
+                        _this.$parent.closePage();
+                        _this.search();
+                    },
+                    error:function(i, s, e){
+                        alert('error'); //错误的处理
+                    }
+                });
+            }
         },
         openModifyPage: function(arg){
             debugger
@@ -372,6 +375,7 @@ Vue.component('vue-table', {
         openDetailPage: function(arg){
             debugger
             var id = arg.target.getAttribute("ids");
+            this.$parent.openDetailPage(id);
         },
         first_page: function(arg){
             //首页
@@ -414,8 +418,10 @@ Vue.component('vue-page', {
     template: '<div class="vue-page" v-bind:style="{\'display\': display}">'+
                 '<div class="main" v-bind:style="{\'width\': width, \'height\':height}">'+
                     '<div class="top">'+
-                        '<span class="close" v-on:click="closePage">X</span>'+
-                        '<span>弹出层</span>'+
+                        '<span class="close" v-on:click="closePage">'+
+                        '<img src="../../images/module/close-icon2.png" style="float: right; width: 48px; ">'+
+                        '</span>'+
+                        '<span>{{pageName}}</span>'+
                     '</div>'+
                     '<div class="middle" v-bind:style="{\'height\':middleHeight}"><iframe v-bind:src="src"></iframe></div>'+
                 '</div>'+
@@ -426,11 +432,13 @@ Vue.component('vue-page', {
             middleHeight: '0px',
             display: 'none',
             width: '0px',
-            height: '0px'
+            height: '0px',
+            pageName: '弹出层'
         }
     },
     methods: {
         loadPageInfo: function(temp){
+            this.pageName = temp.pageName;
             this.src = temp.src;
             this.middleHeight = parseInt(temp.height.substring(0,temp.height.length-2)) - 50 + "px";
             this.display = '';

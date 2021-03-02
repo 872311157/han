@@ -1,7 +1,7 @@
 $(function(){
-    var pageInfo = new HyInfoPage();
+    var pageInfo = new InfoPage();
     pageInfo.setDefaultData();
-    pageInfo.vueId = "hyModule_modify";
+    pageInfo.vueId = "module_modify";
 //    alert(JSON.stringify(hyInfoPage));
     pageInfo.createVue();
 })

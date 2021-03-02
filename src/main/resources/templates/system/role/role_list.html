@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/vue-utils.css" media="all"/>
+    <script src="../../js/jquery-3.5.1.min.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/vue-utils.js"></script>
+    <script src="../../js/hyPageBase.js"></script>
+    <script src="./role_list.js"></script>
+</head>
+<body style="overflow: hidden;">
+<!-- right -->
+<div id="role_list" style="height: 100%;">
+    <div class="table_search">
+        <div>
+            <span>是否有效</span>
+            <span>
+                <select class="select-text" v-model="params.isDel">
+                    <option value="0">有效</option>
+                    <option value="1">无效</option>
+                </select>
+            </span>
+        </div>
+        <div>
+            <span>角色名称:</span>
+            <span>
+                <input type="text" class="input-text" v-model="params.roleName" />
+            </span>
+        </div>
+        <div>
+            <span>中文名称:</span>
+            <span>
+                <input type="text" class="input-text" v-model="params.roleNameZh" />
+            </span>
+        </div>
+        <div>
+            <input type="button" v-on:click="openInsertPage" value="新 增" class="blue-int" />
+            <input type="button" v-on:click="innerRest" value="重 置" class="green-int" />
+            <input type="button" v-on:click="innerSearch" value="查 询" class="yellow-int" />
+        </div>
+    </div>
+    <div class="table_body">
+        <div class="head-list">
+            <table>
+                <thead ct="head_names">
+                <tr>
+                    <th style="text-align: center; width: 60px;" md="index">编号</th>
+                    <th style="text-align: center; width: 20%;" md="roleName">角色名称</th>
+                    <th style="text-align: center; width: 50%;" md="roleNameZh">中文名称</th>
+                    <th style="text-align: center; width: 10%;" md="isDel">是否有效</th>
+                    <th style="text-align: center; width: 20%;" md="createTimeStr">创建时间</th>
+                    <th style="text-align: center; width: 140px;" md="operation">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <vue-table ref="VueTable" v-bind:config="config" v-bind:params="params"></vue-table>
+    </div>
+    <vue-page ref="VueInfoPage"></vue-page>
+</div>
+</body>
+</html>

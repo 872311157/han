@@ -21,11 +21,48 @@ public class HModuleService {
     public EntityBeanSet queryPageList(Map<String, Object> param){
         Integer pageSize = (Integer) param.get("pageSize");
         Integer pageNum = (Integer) param.get("pageNum");
-
+        Integer startIndex = (pageNum-1)*pageSize;
+        param.put("startIndex", startIndex);
         int count = this.hModuleMapper.queryPageCount(param);
         List<HModule> list = this.hModuleMapper.queryPageList(param);
         EntityBeanSet set = new EntityBeanSet(pageSize, pageNum, count, list);
         return set;
+    }
+
+    /**
+     * 新增
+     * @param module
+     * @return
+     */
+    public int save(HModule module){
+        return this.hModuleMapper.save(module);
+    }
+
+    /**
+     * 修改
+     * @param module
+     * @return
+     */
+    public int modify(HModule module) {
+        return this.hModuleMapper.modify(module);
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public int delete(Integer id) {
+        return this.hModuleMapper.delete(id);
+    }
+
+    /**
+     * 查询
+     * @param param
+     * @return
+     */
+    public HModule query(Map<String, Object> param){
+        return this.hModuleMapper.query(param);
     }
 
     /**

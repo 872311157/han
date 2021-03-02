@@ -18,6 +18,34 @@ public interface HModuleMapper {
     public List<HModule> getModulesByUid(Integer uid);
 
     /**
+     * 新增
+     * @param module
+     * @return
+     */
+    public int save(HModule module);
+
+    /**
+     * 修改
+     * @param module
+     * @return
+     */
+    public int modify(HModule module);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    public int delete(Integer id);
+
+    /**
+     * 查询
+     * @param param
+     * @return
+     */
+    public HModule query(Map<String, Object> param);
+
+    /**
      * 分页查询
      * @param param
      * @return

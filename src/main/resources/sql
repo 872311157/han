@@ -27,7 +27,7 @@ insert into hrole(createtime, isDel, roleName, roleNameZh) values('2021-02-25 10
 
 CREATE TABLE hmodule(
 	id serial PRIMARY KEY not null,
-	createtime DATE,
+	createtime TIMESTAMP,
 	iconfont VARCHAR(64),
 	modulename VARCHAR(64),
 	moduleurl VARCHAR(64),
@@ -35,11 +35,12 @@ CREATE TABLE hmodule(
 	moduletype INTEGER
 );
 --alter table hmodule add orderno INTEGER; --序号
-insert into hmodule(iconfont, modulename, moduletype, orderno) values('系统管理', 0, 0);
-insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('系统配置', '/han/system', 0, 0, 1);
-insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('角色配置', '/han/role', 1, 1, 1);
-insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('用户配置', '/han/user', 1, 2, 1);
-insert into hmodule(iconfont, modulename, moduleurl, moduletype, orderno, parentid) values('模型配置', '/han/module', 1, 3, 1);
+insert into hmodule(iconfont, modulename, moduletype, orderno) values('icon_1', '系统管理', 0, 0);
+insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('系统配置', 'system/system/system_list.html', 0, 0, 1);
+insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('角色配置', 'system/role/role_list.html', 1, 1, 1);
+insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('用户配置', 'system/user/role_list.html', 1, 2, 1);
+insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('模型配置', 'system/role/role_list.html', 1, 3, 1);
+insert into hmodule(modulename, moduleurl, moduletype, orderno, parentid) values('字典配置', 'system/dict/dict_list.html', 1, 3, 1);
 
 CREATE TABLE hrole_hmodule(
 	id serial PRIMARY KEY not null,

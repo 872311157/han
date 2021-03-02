@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../../css/vue-utils.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="../../js/jquery-3.5.1.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/vue-utils.js"></script>
+    <script src="../../js/hyPageBase.js"></script>
+    <script src="./module_details.js"></script>
+</head>
+<body>
+    <div id="module_details" class="infoPage">
+        <div class="infoMain" v-bind:style="{'height':main_height}">
+            <div class="spanOne">
+                <span>模块名称:</span>
+                <span>
+                    <input hidden="hidden" type="text" v-model="moduleBean.id"/>
+                    <input type="text" v-model="moduleBean.moduleName" readonly="readonly"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>访问路径:</span>
+                <span>
+                    <input type="text" v-model="moduleBean.moduleUrl" readonly="readonly"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>类别:</span>
+                <span>
+                    <input v-model="moduleBean.moduleType" readonly="readonly"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>父模块:</span>
+                <span>
+                    <input type="text" v-model="moduleBean.parentId" readonly="readonly"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>图标:</span>
+                <span>
+                    <input type="text" v-model="moduleBean.iconFont" readonly="readonly"/>
+                </span>
+            </div>
+            <div class="spanOne">
+                <span>序号:</span>
+                <span>
+                    <input type="text" v-model="moduleBean.orderNo" readonly="readonly"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

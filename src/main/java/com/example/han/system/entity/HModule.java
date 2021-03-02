@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class HModule {
     private Integer id;
-    private Date createtime;
+    private Date createTime;
     private String iconFont;//图标
     private String moduleName;//模型名称
     private String moduleUrl;//模型url地址
@@ -34,12 +34,12 @@ public class HModule {
         this.iconFont = iconFont;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getModuleName() {

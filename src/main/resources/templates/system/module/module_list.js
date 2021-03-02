@@ -3,10 +3,12 @@ $(function(){
 //    var configMap = window.parent.configMap;
     pageInfo = new HySearchPage();
     pageInfo.vueId = "module_list";
-    pageInfo.search_server = "/han/module";
+    pageInfo.module_server = "/han/module";
     pageInfo.searchName = "queryModuleList";
-    pageInfo.insertPage = "system/module/hyModule_add.html";
-    pageInfo.modifyPage = "system/module/hyModule_modify.html";
-    pageInfo.setPageInfo("500px", "350px");
+    pageInfo.delName = "delete";
+    pageInfo.insertPage = "./module_add.html";
+    pageInfo.modifyPage = "./module_modify.html";
+    pageInfo.detailsPage = "./module_details.html";
+    pageInfo.setPageInfo("500px", "370px");
     pageInfo.createVue();
 })

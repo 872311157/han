@@ -9,6 +9,32 @@
         <result column="rolenamezh" jdbcType="VARCHAR" property="roleNameZh"/>
     </resultMap>
 
+    <select id="queryPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from hrole
+        <where>
+            <if test="moduleName!=null and moduleName!=''">
+                and rolename like concat('%',#{roleName},'%')
+            </if>
+            <if test="roleNameZh!=null and roleNameZh!=''">
+                and roleNameZh like concat('%',#{roleNameZh},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPageList" resultType="com.example.han.system.entity.HRole" parameterType="java.util.Map">
+        select * from hrole
+        <where>
+            <if test="moduleName!=null and moduleName!=''">
+                and rolename like concat('%',#{roleName},'%')
+            </if>
+            <if test="roleNameZh!=null and roleNameZh!=''">
+                and roleNameZh like concat('%',#{roleNameZh},'%')
+            </if>
+        </where>
+        order by createtime desc LIMIT #{pageSize} OFFSET #{startIndex}
+        <!--mysql limit #{startIndex},#{pageSize}-->
+    </select>
+
     <select id="getRolesByUid" resultMap="HRole" parameterType="java.lang.Integer">
         select * from hrole where id in (select id from hrole_huser where uid= #{id})
     </select>
